@@ -17,11 +17,11 @@ const element = <h1>Hello, world!</h1>;
 
 The tag stuff is JSX.
 
-## JSX is a syntax extension to JavaScript.
+## <u>JSX is a syntax extension to JavaScript.</u>
 *We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript.*
 JSX produces React “elements”.
 
-## Embedding Expressions in JSX
+## <u>Embedding Expressions in JSX</u>
 ```javascript
 const name = 'Josh Perez';
 const element = <h1>Hello, {name}</h1>;
@@ -51,7 +51,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<h1>Hello, world!</h1>);
 ```
 
-## JSX is an Expression Too
+## <u>JSX is an Expression Too</u>
 you can use JSX inside of if statements and for loops, assign it to variables, accept it as arguments, and return it from functions:
 
 ```javascript
@@ -63,7 +63,7 @@ function getGreeting(user) {
 }
 ```
 
-## Specifying Attributes with JSX
+## <u>Specifying Attributes with JSX</u>
 
 You may use quotes to specify string literals as attributes:
 
@@ -77,7 +77,7 @@ const element = <img src={user.avatarUrl}></img>;
 
 ```
 
-## Specifying Children with JSX
+## <u>Specifying Children with JSX</u>
 If a tag is empty, you may close it immediately with />, like XML:
 ```javascript
 const element = <img src={user.avatarUrl} />;
@@ -93,7 +93,7 @@ const element = (
 
 ```
 
-## JSX Prevents Injection Attacks
+## <u>JSX Prevents Injection Attacks</u>
 It is safe to embed user input in JSX:
 ```javascript
 const title = response.potentiallyMaliciousInput;
@@ -102,7 +102,7 @@ const element = <h1>{title}</h1>;
 ```
 By default, React DOM escapes any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that’s not explicitly written in your application. Everything is converted to a string before being rendered. This helps prevent XSS (cross-site-scripting) attacks.
 
-## JSX Represents Objects
+## <u>JSX Represents Objects</u>
 Babel compiles JSX down to React.createElement() calls.
 
 These two examples are identical:
@@ -135,6 +135,64 @@ const element = {
 
 These objects are called “React elements”. You can think of them as descriptions of what you want to see on the screen. React reads these objects and uses them to construct the DOM and keep it up to date.
 
+<div>
+
+# Rendering Elements
+*Elements are the smallest building blocks of React apps*
+
+An element describes what you want to see on the screen:
+```javascript
+const element = <h1>Hello, world</h1>;
+```
+
+Note: *Components* **NOT SAME** as *Elements*. Elements are what components are made of. Unlike browser DOM elements, React elements are plain objects are cheap to create. react DOM takes care of updating the DOM to match the React elements. 
+
+## <u>Rendering an Element into the DOM</u>
+Let's say there is a ``` <div> ``` somewhere in your HTML file:
+```javascript
+<div id="root"></div>
+```
+call this a “root” DOM node because everything inside it will be managed by React DOM.
+
+To render a React element, first pass the DOM element to ReactDOM.createRoot(), then pass the React element to root.render():
+```javascript
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+);
+const element = <h1>Hello, world</h1>;
+root.render(element);
+```
+
+## <u>Updating the Rendered Element</u>
+React *elements* are IMMMUTABLE. 
+
+ticking clock example:
+```javascript
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+);
+
+function tick() {
+  const element = (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {new Date().toLocaleTimeString()}.</h2>
+    </div>
+  );
+  root.render(element);
+}
+
+setInterval(tick, 1000);
+```
+
+In practice, most React apps only call root.render() once. In the next sections we will learn how such code gets encapsulated into stateful components.
+
+We recommend that you don’t skip topics because they build on each other.
+
+
+## <u>React Only Updates What’s Necessary</u>
+
+React DOM compares the element and its children to the previous one, and only applies the DOM updates necessary to bring the DOM to the desired state
 
 
 
